@@ -24,6 +24,7 @@ namespace UnityStandardAssets._2D
         {
             // Setting up references.
             m_GroundCheck = transform.Find("GroundCheck");
+			Debug.Log (m_GroundCheck.name);
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -39,6 +40,7 @@ namespace UnityStandardAssets._2D
             Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
             for (int i = 0; i < colliders.Length; i++)
             {
+
                 if (colliders[i].gameObject != gameObject)
                     m_Grounded = true;
             }

@@ -4,12 +4,15 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace playerController
 {
+
 	[RequireComponent(typeof (PlayerController))]
 	public class Platformer2DController : MonoBehaviour
 	{
 		private PlayerController mCharacter;
 		private bool mJump;
-		
+
+		public string jumpKey;
+		public string moveKeys;
 		
 		private void Awake()
 		{
@@ -22,7 +25,9 @@ namespace playerController
 			if (!mJump)
 			{
 				// Read the jump input in Update so button presses aren't missed.
-				mJump = Input.GetKeyDown("space");
+
+				mJump = CrossPlatformInputManager.GetButtonDown(jumpKey);
+
 			}
 		}
 		
@@ -31,7 +36,8 @@ namespace playerController
 		{
 			// Read the inputs.
 			bool crouch = Input.GetKey(KeyCode.LeftControl);
-			float h = Input.GetAxis ("Horizontal");
+			float h = CrossPlatformInputManager.GetAxis(moveKeys);
+			Debug.Log ("2e");
 			// Pass all parameters to the character control script.
 			mCharacter.Move(h, crouch, mJump);
 			mJump = false;

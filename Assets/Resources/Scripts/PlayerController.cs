@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityStandardAssets.CrossPlatformInput;
 namespace playerController
 {
 	public class PlayerController : MonoBehaviour {
@@ -23,6 +23,7 @@ namespace playerController
 		{
 			// Setting up references.
 			m_GroundCheck = transform.Find("GroundCheck");
+			Debug.Log (m_GroundCheck.name);
 			m_CeilingCheck = transform.Find("CeilingCheck");
 			m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		}
@@ -37,9 +38,12 @@ namespace playerController
 			Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 			for (int i = 0; i < colliders.Length; i++)
 			{
+				Debug.Log(colliders[i].gameObject.name + "HJE");
 				if (colliders[i].gameObject != gameObject)
 					m_Grounded = true;
 			}
+
+
 		}
 		
 		
@@ -49,10 +53,10 @@ namespace playerController
 			if (!crouch)
 			{
 				// If the character has a ceiling preventing them from standing up, keep them crouching
-//				if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-//				{
-//					crouch = true;
-//				}
+			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+				{
+					crouch = true;
+				}
 			}
 
 			
